@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مبادرة أثر - الإسعافات الأولية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #d62839;
+    --red-dark: #a81a2a;
+    --ink: #1f2a37;
+    --muted: #5b6673;
+    --line: #dfe5ec;
+    --bg: #eef2f6;
+    --card: #ffffff;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 20px 14px;
+  }
+  .app {
+    width: 100%;
+    max-width: 440px;
+    background: var(--card);
+    border-radius: 24px;
+    padding: 22px 20px 26px;
+    box-shadow: 0 6px 30px rgba(31, 42, 55, .12);
+  }
+  header { text-align: center; }
+  .logo { display: inline-flex; align-items: center; gap: 8px; color: var(--red); font-weight: 800; font-size: 1.6rem; }
+  .logo svg { width: 34px; height: 34px; }
+  .tagline { color: var(--muted); font-size: .95rem; margin-top: 2px; }
+  .title {
+    display: block;
+    background: var(--red);
+    color: #fff;
+    font-weight: 800;
+    font-size: 1.3rem;
+    padding: 8px 16px;
+    border-radius: 10px;
+    margin: 18px 0 8px;
+  }
+  .sub { text-align: center; color: var(--muted); font-size: .95rem; margin-bottom: 16px; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .tile {
+    font-family: inherit;
+    background: #fff;
+    border: 1.5px solid var(--line);
+    border-radius: 14px;
+    padding: 14px 6px 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: var(--ink);
+    font-weight: 600;
+    font-size: .95rem;
+    transition: transform .15s, border-color .15s, background .15s;
+  }
+  .tile:hover { border-color: var(--red); background: #fff5f6; }
+  .tile:active { transform: scale(.96); }
+  .tile:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+  .icon { font-size: 2rem; line-height: 1; height: 38px; display: flex; align-items: center; }
+  .icon.num { color: var(--red); font-weight: 800; font-size: 1.7rem; }
+  .qr-box {
+    margin-top: 18px;
+    border: 1.5px dashed var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .qr-box canvas { width: 84px; height: 84px; flex: none; image-rendering: pixelated; }
+  .qr-box p { font-size: .9rem; color: var(--muted); }
+  .qr-box a { color: var(--red-dark); font-weight: 600; }
+  footer { text-align: center; margin-top: 18px; color: var(--red); font-weight: 600; }
+
+  dialog {
+    border: none;
+    border-radius: 20px;
+    padding: 0;
+    width: min(92vw, 400px);
+    margin: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .3);
+  }
+  dialog::backdrop { background: rgba(31, 42, 55, .55); }
+  dialog[open] { animation: pop .2s ease-out; }
+  @keyframes pop { from { transform: scale(.92); opacity: 0; } to { transform: none; opacity: 1; } }
+  .d-head {
+    background: var(--red);
+    color: #fff;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 800;
+    font-size: 1.2rem;
+  }
+  .d-body { padding: 8px 18px 4px; }
+  .row { padding: 12px 0; line-height: 1.8; font-size: 1rem; }
+  .row + .row { border-top: 1px solid var(--line); }
+  .close {
+    font-family: inherit;
+    display: block;
+    width: calc(100% - 36px);
+    margin: 10px 18px 18px;
+    padding: 10px;
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .close:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) {
+    dialog[open] { animation: none; }
+    .tile { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main class="app">
+  <header>
+    <div class="logo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 21s-7-4.6-9.3-9.2C1.2 8.6 3 5 6.5 5c2 0 3.5 1.1 5.5 3.2C14 6.1 15.500 5 17.500 5 21 5 22.800 8.600 21.300 11.800 19 16.400 12 21 12 21z"/>
+        <path d="M5 12h3l1.500-3 3 6 1.500-3H19"/>
+      </svg>
+      مبادرة أثر
+    </div>
+    <p class="tagline">كل ثانية بتفرق.. وكل معلومة بتنقذ</p>
+    <span class="title">الإسعافات الأولية</span>
+    <p class="sub">معلومات بسيطة.. بتفرق في حياة</p>
+  </header>
+
+  <section class="grid" id="grid" aria-label="موضوعات الإسعافات الأولية"></section>
+
+  <section class="qr-box">
+    <canvas id="qr" width="21" height="21" aria-label="رمز QR"></canvas>
+    <p>اضغط الرمز لمشاهدة فيديوهات الإسعافات الأولية<br><a href="#" id="videoLink">أو افتح الرابط من هنا</a></p>
+  </section>
+
+  <footer>معاً.. نكون أكثر أماناً</footer>
+</main>
+
+<dialog id="dlg" aria-labelledby="dTitle">
+  <div class="d-head"><span id="dIcon" aria-hidden="true"></span><span id="dTitle"></span></div>
+  <div class="d-body" id="dBody"></div>
+  <button class="close" id="closeBtn">إغلاق</button>
+</dialog>
+
+<script>
+  // كل موضوع له سطرين فقط من المعلومات. عدّل النصوص هنا بسهولة.
+  const topics = [
+    { icon: "😮", name: "الاختناق", rows: [
+      "شجّع الشخص على السعال، ولو مش قادر يتكلم أو يتنفس اطلب الإسعاف فوراً.",
+      "قف خلفه واضغط بقبضتك على أعلى بطنه بحركة سريعة للداخل ولأعلى حتى يخرج الجسم العالق."
+    ]},
+    { icon: "🔥", name: "الحروق", rows: [
+      "برّد الحرق بماء جارٍ عادي (مش متلج) لمدة 10 إلى 20 دقيقة.",
+      "ما تفقعش الفقاعات ولا تحط معجون أسنان، وغطّي الحرق بشاش نظيف."
+    ]},
+    { icon: "🩸", name: "النزيف", rows: [
+      "اضغط بقوة على الجرح بقطعة قماش نظيفة ومتشيلهاش، وضيف فوقها لو اتبلّلت.",
+      "ارفع الجزء المصاب لأعلى من القلب لو أمكن، ولو النزيف ما وقفش اتصل بـ 123."
+    ]},
+    { icon: "😵", name: "فقدان الوعي", rows: [
+      "نادِ عليه وتأكد من تنفسه؛ لو بيتنفس ضعه على جنبه وراقبه لحد وصول الإسعاف.",
+      "لو مش بيتنفس اتصل بـ 123 وابدأ ضغطات الصدر في منتصف الصدر بسرعة وقوة."
+    ]},
+    { icon: "123", num: true, name: "أرقام الطوارئ", rows: [
+      "الإسعاف: 123 — الشرطة: 122 — المطافئ (الدفاع المدني): 180.",
+      "اتكلم بهدوء، وقل مكانك بالضبط وحالة المصاب، ولا تقفل الخط قبل ما يطلبوا منك."
+    ]},
+    { icon: "▶️", name: "فيديوهات تعليمية", rows: [
+      "فيديوهات قصيرة بتشرح الإسعافات الأولية خطوة بخطوة.",
+      "امسح رمز QR أو اضغط على الرابط تحت لمشاهدتها."
+    ]}
+  ];
+
+  const grid = document.getElementById("grid");
+  const dlg = document.getElementById("dlg");
+
+  topics.forEach(t => {
+    const b = document.createElement("button");
+    b.className = "tile";
+    b.innerHTML = `<span class="icon${t.num ? " num" : ""}" aria-hidden="true">${t.icon}</span><span>${t.name}</span>`;
+    b.addEventListener("click", () => openTopic(t));
+    grid.appendChild(b);
+  });
+
+  function openTopic(t) {
+    document.getElementById("dIcon").textContent = t.num ? "☎️" : t.icon;
+    document.getElementById("dTitle").textContent = t.name;
+    document.getElementById("dBody").innerHTML = t.rows.map(r => `<p class="row">${r}</p>`).join("");
+    dlg.showModal();
+  }
+
+  document.getElementById("closeBtn").addEventListener("click", () => dlg.close());
+  dlg.addEventListener("click", e => { if (e.target === dlg) dlg.close(); });
+
+  // ضع رابط الفيديوهات الحقيقي هنا
+  const VIDEO_URL = "#";
+  document.getElementById("videoLink").href = VIDEO_URL;
+
+  // رمز QR شكلي للتصميم. استبدله بصورة QR حقيقية للرابط (مثلاً من qr-code-generator.com)
+  (function drawFakeQR() {
+    const c = document.getElementById("qr"), x = c.getContext("2d");
+    x.fillStyle = "#fff"; x.fillRect(0, 0, 21, 21);
+    x.fillStyle = "#1f2a37";
+    const finder = (ox, oy) => {
+      x.fillRect(ox, oy, 7, 7);
+      x.fillStyle = "#fff"; x.fillRect(ox + 1, oy + 1, 5, 5);
+      x.fillStyle = "#1f2a37"; x.fillRect(ox + 2, oy + 2, 3, 3);
+    };
+    finder(0, 0); finder(14, 0); finder(0, 14);
+    let s = 7;
+    for (let i = 0; i < 21; i++) for (let j = 0; j < 21; j++) {
+      const inFinder = (i < 8 && j < 8) || (i > 12 && j < 8) || (i < 8 && j > 12);
+      s = (s * 9301 + 49297) % 233280;
+      if (!inFinder && s / 233280 > 0.5) x.fillRect(i, j, 1, 1);
+    }
+  })();
+</script>
+</body>
+</html>
